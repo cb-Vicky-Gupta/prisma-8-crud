@@ -10,3 +10,10 @@ model User {
   createdAt    temporal.createdAtString()
   updatedAt    temporal.updatedAtString()
 }
+model Task {
+  id          Int                        @id @default(autoincrement())
+  task        String
+  description String?
+  createdAt   temporal.createdAtString()
+  updatedAt   temporal.updatedAtString()
+}

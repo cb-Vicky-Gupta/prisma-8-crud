@@ -8,7 +8,7 @@ const publicUserFields = ["id", "email", "name", "createdAt", "updatedAt"] as co
 export type CreateUserData = {
   email: string;
   passwordHash: string;
-  name?: string;
+  name: string;
 };
 
 export function findUserByEmail(email: string) {
