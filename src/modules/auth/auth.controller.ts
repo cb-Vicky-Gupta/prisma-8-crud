@@ -2,7 +2,7 @@
 // Thrown errors (zod or HttpError) become JSON responses in middleware/error-handler.ts.
 import type { Request, Response } from "express";
 
-import { signupSchema } from "./auth.schema.ts";
+import { loginSchema, signupSchema } from "./auth.schema.ts";
 import * as authService from "./auth.service.ts";
 
 export async function signup(req: Request, res: Response) {
@@ -10,4 +10,10 @@ export async function signup(req: Request, res: Response) {
   const result = await authService.signup(input);
 
   res.status(201).json(result);
+}
+
+export async function login(req: Request, res: Response) {
+  const input = loginSchema.parse(req.body);
+  const result = await authService.login(input);
+  res.status(200).json(result);
 }
