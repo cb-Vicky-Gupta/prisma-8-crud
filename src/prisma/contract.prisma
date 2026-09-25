@@ -1,0 +1,12 @@
+// use prisma-8
+
+// Define your models here, then run `npm run contract:emit`.
+
+model User {
+  id           id.uuidv7String()
+  email        String                     @unique
+  passwordHash String
+  name         String
+  createdAt    temporal.createdAtString()
+  updatedAt    temporal.updatedAtString()
+}

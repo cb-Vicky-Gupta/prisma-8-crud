@@ -4,11 +4,7 @@
   "target": "postgres",
   "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
   "roots": {
-    "Post": {
-      "model": "Post",
-      "namespace": "public"
-    },
-    "User": {
+    "user": {
       "model": "User",
       "namespace": "public"
     }
@@ -17,100 +13,6 @@
     "namespaces": {
       "public": {
         "models": {
-          "Post": {
-            "fields": {
-              "authorId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "content": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "title": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "updatedAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              }
-            },
-            "relations": {
-              "author": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "authorId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "public"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "authorId": {
-                  "column": "authorId"
-                },
-                "content": {
-                  "column": "content"
-                },
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "title": {
-                  "column": "title"
-                },
-                "updatedAt": {
-                  "column": "updatedAt"
-                }
-              },
-              "namespaceId": "public",
-              "table": "Post"
-            }
-          },
           "User": {
             "fields": {
               "createdAt": {
@@ -144,38 +46,22 @@
                   "kind": "scalar"
                 }
               },
+              "passwordHash": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "updatedAt": {
                 "nullable": false,
                 "type": {
                   "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
-              },
-              "username": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
               }
             },
-            "relations": {
-              "posts": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "authorId"
-                  ]
-                },
-                "to": {
-                  "model": "Post",
-                  "namespace": "public"
-                }
-              }
-            },
+            "relations": {},
             "storage": {
               "fields": {
                 "createdAt": {
@@ -190,15 +76,15 @@
                 "name": {
                   "column": "name"
                 },
+                "passwordHash": {
+                  "column": "passwordHash"
+                },
                 "updatedAt": {
                   "column": "updatedAt"
-                },
-                "username": {
-                  "column": "username"
                 }
               },
               "namespaceId": "public",
-              "table": "User"
+              "table": "user"
             }
           }
         }
@@ -210,59 +96,7 @@
       "public": {
         "entries": {
           "table": {
-            "Post": {
-              "columns": {
-                "authorId": {
-                  "codecId": "sql/char@1",
-                  "nativeType": "character",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "content": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
-                },
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "default": {
-                    "expression": "now()",
-                    "kind": "function"
-                  },
-                  "nativeType": "timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "nativeType": "character",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "title": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": false
-                },
-                "updatedAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "nativeType": "timestamptz",
-                  "nullable": false
-                }
-              },
-              "foreignKeys": [],
-              "indexes": [],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": []
-            },
-            "User": {
+            "user": {
               "columns": {
                 "createdAt": {
                   "codecId": "pg/timestamptz-string@1",
@@ -291,15 +125,15 @@
                   "nativeType": "text",
                   "nullable": true
                 },
+                "passwordHash": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
                 "updatedAt": {
                   "codecId": "pg/timestamptz-string@1",
                   "nativeType": "timestamptz",
                   "nullable": false
-                },
-                "username": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
                 }
               },
               "foreignKeys": [],
@@ -323,10 +157,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "bd6cd4febdccf911cbc0230a0ee66d1eeb16a0f11a9a95931dbe32fc35a3feeb"
+    "storageHash": "c9325a55c992a252658f77dda0b07a985810536c68d5ffdb002d60893bd7e1a1"
   },
   "execution": {
-    "executionHash": "fded2d39ac902307abfa1d94180d6742a85b04ee38d7795237e17f66b04315ae",
+    "executionHash": "3d14065bff84419cd684f1d0902a86b9b8461825774c7ad66a953221a0b6b06a",
     "mutations": {
       "defaults": [
         {
@@ -337,7 +171,7 @@
           "ref": {
             "column": "id",
             "namespace": "public",
-            "table": "Post"
+            "table": "user"
           }
         },
         {
@@ -352,33 +186,7 @@
           "ref": {
             "column": "updatedAt",
             "namespace": "public",
-            "table": "Post"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "column": "id",
-            "namespace": "public",
-            "table": "User"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "onUpdate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "column": "updatedAt",
-            "namespace": "public",
-            "table": "User"
+            "table": "user"
           }
         }
       ]
